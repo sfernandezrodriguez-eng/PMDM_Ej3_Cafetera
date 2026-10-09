@@ -52,6 +52,10 @@ object CoffeeMachine {
                 currentState = CoffeeMachineState.MakingCoffee(type = "Nescafé")
                 println("¡Café listo! Estado: $currentState")
             }
+            is CoffeeMachineState.SelectCoffee -> {
+                val idleState = currentState as CoffeeMachineState.Idle
+                println("¡Espera! La máquina ya está haciendo café.")
+            }
 
         }
     }
