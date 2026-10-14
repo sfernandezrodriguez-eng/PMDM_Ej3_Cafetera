@@ -1,20 +1,18 @@
 package org.example
 
-import CoffeeMachineState
-import CoffeeMachineState.*
 
 /**
  * Singleton que maneja lo que ocurre en cada estado
  */
 object CoffeeMachine {
-    public var currentState: CoffeeMachineState = CoffeeMachineState.Idle()
+    public var currentState: CoffeeMachineState = CoffeeMachineState.Idle
 
-    fun gestorEstados() {
+    fun gestorEstados(nombreCafe: Cafe, pago:Double) {
         println("Estado actual: $currentState")
 
         when (currentState) {
             is CoffeeMachineState.Idle -> {
-                val idleState = currentState as CoffeeMachineState.SelectCoffee
+                currentState = CoffeeMachineState.SelectCoffee
                 println("Bienvenido, quiere hacer un cafe? Si o no")
                var a = true
                 Thread.sleep(2000)
@@ -34,29 +32,31 @@ object CoffeeMachine {
                 }
             }
 
-
-
             is CoffeeMachineState.SelectCoffee -> {
-                val idleState = currentState as CoffeeMachineState.PaymentCoffee
+                currentState = CoffeeMachineState.PaymentCoffee
                 println("Seleccionando cafe...")
+                Thread.sleep(2000)
+                if(nombreCafe!=null) {
+                    println("Cafe seleccionado: " + nombreCafe.name)
+                    Thread.sleep(2000)
+                }
 
             }
+
             is CoffeeMachineState.PaymentCoffee -> {
 
-                val idleState = currentState as CoffeeMachineState.MakingCoffee
                 println("Paga el café.")
                 Thread.sleep(2000)
-                // Simula un proceso de preparación
-                currentState = MakingCoffee(type = "Nescafé")
-                println("¡Café listo! Estado: $currentState")
+                currentState = CoffeeMachineState.MakingCoffee(type = nombreCafe.nombre)
+                println("¡Café listo! Estado: Pagado")
 
             }
             is CoffeeMachineState.MakingCoffee -> {
-                val idleState = currentState as CoffeeMachineState.ServingCoffee
+                currentState = CoffeeMachineState.ServingCoffee
                 println("¡Espera! La máquina ya está haciendo café.")
             }
             is CoffeeMachineState.ServingCoffee -> {
-                val idleState = currentState as CoffeeMachineState.Idle
+                currentState = CoffeeMachineState.Idle
                 println("Ya hay café servido. Por favor, toma tu café.")
             }
             is CoffeeMachineState.Error -> {
@@ -71,7 +71,7 @@ object CoffeeMachine {
 
             }
 
-            CoffeeMachineState.Inicio -> TODO()
+            CoffeeMachineState.Idle -> TODO()
         }
     }
 }
