@@ -15,8 +15,40 @@ object CoffeeMachine {
         when (currentState) {
             is CoffeeMachineState.Idle -> {
                 val idleState = currentState as CoffeeMachineState.SelectCoffee
-                println("Máquina encendida desde:  Empezando a hacer café...")
+                println("Bienvenido, quiere hacer un cafe? Si o no")
+               var a = true
                 Thread.sleep(2000)
+                if (a == false) {
+                    println("Ok, apagando maquina....")
+                    val idleState = currentState as CoffeeMachineState.Apagado
+                    Thread.sleep(2000)
+                }
+                else if (a == true) {
+                    println("Pasando a seleccion de café...")
+                    Thread.sleep(2000)
+                }
+                else{
+                    println("Error, no has seleccionado una de la opciones....")
+                    val idleState = currentState as CoffeeMachineState.Error
+                    Thread.sleep(2000)
+                }
+            }
+
+
+
+            is CoffeeMachineState.SelectCoffee -> {
+                val idleState = currentState as CoffeeMachineState.PaymentCoffee
+                println("Seleccionando cafe...")
+
+            }
+            is CoffeeMachineState.PaymentCoffee -> {
+
+                val idleState = currentState as CoffeeMachineState.MakingCoffee
+                println("Paga el café.")
+                Thread.sleep(2000)
+                // Simula un proceso de preparación
+                currentState = MakingCoffee(type = "Nescafé")
+                println("¡Café listo! Estado: $currentState")
 
             }
             is CoffeeMachineState.MakingCoffee -> {
@@ -30,16 +62,6 @@ object CoffeeMachine {
             is CoffeeMachineState.Error -> {
                 println("La máquina tiene un error:")
             }
-            is CoffeeMachineState.PaymentCoffee -> {
-
-                val idleState = currentState as CoffeeMachineState.MakingCoffee
-                println("Paga el café.")
-                Thread.sleep(2000)
-                // Simula un proceso de preparación
-                currentState = MakingCoffee(type = "Nescafé")
-                println("¡Café listo! Estado: $currentState")
-
-            }
 
             is CoffeeMachineState.Apagado -> {
 
@@ -48,16 +70,8 @@ object CoffeeMachine {
                 Thread.sleep(2000)
 
             }
-            is CoffeeMachineState.SelectCoffee -> {
-                val idleState = currentState as CoffeeMachineState.PaymentCoffee
-                println("Seleccionando cafe.")
-            }
 
             CoffeeMachineState.Inicio -> TODO()
         }
-    }
-
-    fun clean() {
-        // Implementación de clean
     }
 }
