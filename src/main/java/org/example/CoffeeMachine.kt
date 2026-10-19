@@ -8,7 +8,7 @@ object CoffeeMachine {
     public var currentState: CoffeeMachineState = CoffeeMachineState.Idle
 
     fun gestorEstados(nombreCafe: Cafe, monedero:Double, quieres:Boolean) {
-        println("Estado actual: $currentState")
+        println("Estado actual: ${currentState.toString()}")
 
         when (currentState) {
             is CoffeeMachineState.Idle -> {
@@ -17,7 +17,7 @@ object CoffeeMachine {
                 Thread.sleep(2000)
                 if (quieres == false) {
                     println("Ok, apagando maquina....")
-                    val idleState = currentState as CoffeeMachineState.Apagado
+                    currentState = CoffeeMachineState.Apagado
                     Thread.sleep(2000)
                 }
                 else {
@@ -41,12 +41,11 @@ object CoffeeMachine {
                 Thread.sleep(2000)
                 currentState = CoffeeMachineState.MakingCoffee(type = nombreCafe.nombre)
                 if (monedero >= nombreCafe.precio) {
-                    // Hay dinero suficiente para el café elegido
                     println("Café Pagado")
                     Thread.sleep(2000)
                 } else{
                     println("Error, no hay suficiente dinero en el monedero....")
-                    val idleState = currentState as CoffeeMachineState.Error
+                    currentState = CoffeeMachineState.Error
                     Thread.sleep(2000)
                 }
             }
@@ -67,12 +66,12 @@ object CoffeeMachine {
                 Thread.sleep(2000)
                 println("Solucionando el error....")
                 Thread.sleep(2000)
-                val idleState = currentState as CoffeeMachineState.Idle
+                currentState = CoffeeMachineState.Idle
             }
 
             is CoffeeMachineState.Apagado -> {
                 println("Máquina apagada: Desea encenderla?")
-                val idleState = currentState as CoffeeMachineState.Idle
+                currentState = CoffeeMachineState.Idle
                 println("Máquina encendida desde:  Empezando a hacer café...")
                 Thread.sleep(2000)
             }
