@@ -6,18 +6,21 @@ package org.example
  */
 object CoffeeMachine {
     public var currentState: CoffeeMachineState = CoffeeMachineState.Idle
+    public var monedero: Int = 0
+    public var nombreCafe: Cafe = Cafe.CAFE_LECHE
+    public var quieres:  Boolean = true
 
-    fun gestorEstados(nombreCafe: Cafe, monedero:Double, quieres:Boolean) {
+    fun gestorEstados() {
         println("Estado actual: ${currentState.toString()}")
 
         when (currentState) {
             is CoffeeMachineState.Idle -> {
-                currentState = CoffeeMachineState.SelectCoffee
+                currentState = CoffeeMachineState.SelectCoffee(type = nombreCafe)
                 println("Bienvenido, quiere hacer un cafe? Si o no")
                 Thread.sleep(2000)
                 if (quieres == false) {
                     println("Ok, apagando maquina....")
-                    currentState = CoffeeMachineState.Apagado
+                    currentState = CoffeeMachineState.Apagado(type= quieres)
                     Thread.sleep(2000)
                 }
                 else {
@@ -27,7 +30,7 @@ object CoffeeMachine {
             }
 
             is CoffeeMachineState.SelectCoffee -> {
-                currentState = CoffeeMachineState.PaymentCoffee
+                currentState = CoffeeMachineState.PaymentCoffee(type = nombreCafe)
                 println("Seleccionando cafe...")
                 Thread.sleep(2000)
                 println("Cafe seleccionado: " + nombreCafe.name)
@@ -45,13 +48,15 @@ object CoffeeMachine {
                     Thread.sleep(2000)
                 } else{
                     println("Error, no hay suficiente dinero en el monedero....")
-                    currentState = CoffeeMachineState.Error
+                    currentState = CoffeeMachineState.Error(
+                        message = "Error, no hay suficiente dinero en el monedero...."
+                    )
                     Thread.sleep(2000)
                 }
             }
 
             is CoffeeMachineState.MakingCoffee -> {
-                currentState = CoffeeMachineState.ServingCoffee
+                currentState = CoffeeMachineState.ServingCoffee(type = nombreCafe)
                 println("¡Espera! La máquina ya está haciendo café.")
                 Thread.sleep(5000)
             }
@@ -72,10 +77,15 @@ object CoffeeMachine {
             is CoffeeMachineState.Apagado -> {
                 println("Máquina apagada: Desea encenderla?")
                 currentState = CoffeeMachineState.Idle
-                println("Máquina encendida desde:  Empezando a hacer café...")
+                println("Máquina encendida:  Empezando a hacer café...")
                 Thread.sleep(2000)
             }
             CoffeeMachineState.Idle -> TODO()
         }
+    }
+    fun clean() {
+        println("Limpiando la máquina...")
+        currentState = CoffeeMachineState.Idle
+        println("Máquina limpia. Estado: $currentState")
     }
 }

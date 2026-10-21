@@ -6,12 +6,12 @@ sealed class CoffeeMachineState {
             return "Idle"
         }
     }
-    object SelectCoffee : CoffeeMachineState(){
+    data class SelectCoffee(val type: Cafe) : CoffeeMachineState(){
         override fun toString(): String {
             return "SelectCoffee"
         }
     }
-    object PaymentCoffee : CoffeeMachineState(){
+    data class PaymentCoffee(val type: Cafe) : CoffeeMachineState(){
         override fun toString(): String {
             return "PaymentCoffee"
         }
@@ -21,17 +21,17 @@ sealed class CoffeeMachineState {
             return "MakingCoffee"
         }
     }
-    object ServingCoffee : CoffeeMachineState(){
+    data class ServingCoffee(val type: Cafe) : CoffeeMachineState(){
         override fun toString(): String {
             return "ServingCoffee"
         }
     }
-    object Apagado : CoffeeMachineState(){
+    data class Apagado(val type: Boolean) : CoffeeMachineState(){
         override fun toString(): String {
             return "Apagado"
         }
     }
-    object Error : CoffeeMachineState(){
+    data class Error(val message: String) : CoffeeMachineState(){
         override fun toString(): String {
             return "Error"
         }

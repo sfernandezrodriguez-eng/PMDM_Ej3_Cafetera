@@ -2,22 +2,64 @@ package org.example
 
 fun main() {
 
+    println("-------- Si hace cafe --------")
 
     println("---- Primera llamada ----")
-    CoffeeMachine.gestorEstados(Cafe.CAFE_LECHE,7.0,true)
+    CoffeeMachine.gestorEstados()
 
     println("---- Segunda llamada ----")
-    CoffeeMachine.gestorEstados(Cafe.CAFE_LECHE,7.0,true)
+    CoffeeMachine.gestorEstados()
 
     println("---- Tercera llamada ----")
-    CoffeeMachine.gestorEstados(Cafe.CAFE_LECHE,7.0,true)
+    CoffeeMachine.gestorEstados()
 
 
     println("---- Cuarta llamada ----")
-    CoffeeMachine.gestorEstados(Cafe.CAFE_LECHE,7.0,true)
+    CoffeeMachine.gestorEstados()
 
 
     println("---- Quinta llamada ----")
-    CoffeeMachine.gestorEstados(Cafe.CAFE_LECHE,7.0,true)
+    CoffeeMachine.gestorEstados()
+
+
+    println("-------- Insuficiente dinero --------")
+
+    println("---- Primera llamada ----")
+    CoffeeMachine.gestorEstados()
+
+    println("---- Segunda llamada ----")
+    CoffeeMachine.gestorEstados()
+
+    println("---- Tercera llamada ----")
+    CoffeeMachine.gestorEstados()
+
+    println("---- Cuarta llamada ----")
+    CoffeeMachine.gestorEstados()
+
+
+    println("-------- Dinero negativo --------")
+
+    println("---- Primera llamada ----")
+    CoffeeMachine.gestorEstados()
+
+    println("---- Segunda llamada ----")
+    CoffeeMachine.gestorEstados()
+
+    println("---- Tercera llamada ----")
+    CoffeeMachine.gestorEstados()
+
+
+    println("---- Cuarta llamada ----")
+    CoffeeMachine.gestorEstados()
+
+
+    println("-------- Se apaga --------")
+
+    println("---- Primera llamada ----")
+    CoffeeMachine.gestorEstados()
+
+    println("---- Segunda llamada ----")
+    CoffeeMachine.gestorEstados()
+
 
 }
