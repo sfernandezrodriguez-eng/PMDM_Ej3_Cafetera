@@ -107,8 +107,8 @@ class MainTest {
 
     }
 
-
-    private fun resetMachine() {
+    @Test
+    fun resetMachine() {
         monedero = 0
         quieres = true
         nombreCafe = Cafe.CAFE_LECHE
