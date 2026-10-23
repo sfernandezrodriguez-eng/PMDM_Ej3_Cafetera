@@ -5,10 +5,10 @@ package org.example
  * Singleton que maneja lo que ocurre en cada estado
  */
 object CoffeeMachine {
-    public var currentState: CoffeeMachineState = CoffeeMachineState.Idle
-    public var monedero: Int = 0
-    public var nombreCafe: Cafe = Cafe.CAFE_LECHE
-    public var quieres:  Boolean = true
+    var currentState: CoffeeMachineState = CoffeeMachineState.Idle
+    var monedero: Int = 0
+    var nombreCafe: Cafe = Cafe.CAFE_LECHE
+    var quieres:  Boolean = true
 
     fun gestorEstados() {
 
@@ -28,10 +28,5 @@ object CoffeeMachine {
             is CoffeeMachineState.Apagado -> state.onEnter()
 
         }
-    }
-    fun clean() {
-        println("Limpiando la máquina...")
-        currentState = CoffeeMachineState.Idle
-        println("Máquina limpia. Estado: $currentState")
     }
 }

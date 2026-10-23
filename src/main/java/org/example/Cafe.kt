@@ -5,7 +5,4 @@ enum class Cafe(val nombre: String, val precio: Double) {
     ESPRESSO("Espresso",12.5),
     CAPUCHINO("Capuchino",12.0),
     AMERICANO("Americano",13.5)
-
-
-
 }
