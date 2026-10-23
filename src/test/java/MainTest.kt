@@ -32,7 +32,7 @@ class MainTest {
     @Test
     fun goingToPayment() {
         CoffeeMachine.currentState = CoffeeMachineState.SelectCoffee(nombreCafe)
-        CoffeeMachine.monedero = 10
+        monedero = 10
         CoffeeMachine.gestorEstados()
 
         assertEquals(
@@ -44,7 +44,7 @@ class MainTest {
 
     @Test
     fun goingToMaking() {
-        CoffeeMachine.monedero = 10
+        monedero = 10
         CoffeeMachine.currentState = CoffeeMachineState.PaymentCoffee(monedero)
         CoffeeMachine.gestorEstados()
 
@@ -84,7 +84,7 @@ class MainTest {
 
     @Test
     fun goingToTurnOut() {
-        CoffeeMachine.quieres = false
+        quieres = false
         CoffeeMachine.gestorEstados()
 
         assertEquals(
@@ -96,7 +96,7 @@ class MainTest {
 
     @Test
     fun notEnoughMoney() {
-        CoffeeMachine.nombreCafe = Cafe.CAFE_LECHE
+        nombreCafe = Cafe.CAFE_LECHE
         CoffeeMachine.currentState = CoffeeMachineState.PaymentCoffee(monedero)
         CoffeeMachine.gestorEstados()
 
@@ -109,9 +109,9 @@ class MainTest {
 
 
     private fun resetMachine() {
-        CoffeeMachine.monedero = 0
-        CoffeeMachine.quieres = true
-        CoffeeMachine.nombreCafe = Cafe.CAFE_LECHE
+        monedero = 0
+        quieres = true
+        nombreCafe = Cafe.CAFE_LECHE
         CoffeeMachine.currentState = CoffeeMachineState.Idle
     }
 
